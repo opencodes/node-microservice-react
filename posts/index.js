@@ -30,9 +30,10 @@ app.get('/posts', (req, res) => {
     res.status(200).send(post)
 })
 app.post('/events', (req, res) => {
-    console.log('Event Received');
+    const { type, data } = req.body;
+    console.log('Event Received', type, data);
     res.status(200).send({})
 })
 app.listen(4000, () => {
-    console.log("App listening on port 4000");
+    console.log("Post Service - App listening on port 4000");
 })

@@ -24,17 +24,33 @@ app.post('/posts/:id/comments', (req, res) => {
         comments[id] = []
     }
     let commentId = randomBytes(4).toString('hex');
-    let commentObj = { commentId, comment };
+    let commentObj = { commentId, comment, status: 'pending' };
     comments[id].push(commentObj)
     axios.post(eventBusUrl, { type: "CommentCreated", data: { ...commentObj, postId: id } }).catch(err => console.log(err))
     res.status(200).send(commentObj);
 })
 
-
 app.post('/events', (req, res) => {
-    console.log('Event Received');
-    res.status(200).send({})
+    const { type, data } = req.body;
+    console.log('Event received', type, data);
+    switch (type) {
+        case 'CommentModerated':
+            const { postId, commentId, comment, status } = data;
+            let updatedComment = { postId, commentId, comment, status };
+            comments[postId].map(c => {
+                if (c.commentId = commentId) {
+                    c.status = status
+                }
+                return c;
+            });
+            axios.post(eventBusUrl, { type: "CommentUpdated", data: updatedComment }).catch(err => console.log(err))
+            break;
+        default:
+            break;
+    }
+    res.status(200);
 })
+
 app.listen(4001, () => {
-    console.log("Comment app listening on port 4001");
+    console.log("Comment Service - App listening on port 4001");
 })

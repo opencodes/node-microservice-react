@@ -9,6 +9,28 @@ Micro Services
 3. Query Service
 4. Event Bus
 
+TO DO
+### Comment Moderation
+	- Comment Service  
+		- On create comment emit event   CreateComment with comment info to Event bus
+	- Event Bus 
+		- Publish event to all subscriber
+	- Moderate Comment Service 
+		- Receive CreateComment event
+		- Update comment 
+		- Emit CommentModerated with updated status to comment to Event bus
+	- Event Bus 
+		- Publish event to all subscriber
+	- Comment Service  
+		- Receive CommentModerated event 
+		- Update comment with status
+		- Emit CommentUpdated to Event bus
+	- Event Bus 
+			- Publish event to all subscriber
+	- Query Service
+		- Receive CommentUpdated event
+		- Update comment
+
 Key Notes
 1. Handling one-to-many relation in microservice
    For example fetch  posts with their all comment
