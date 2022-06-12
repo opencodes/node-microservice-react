@@ -8,7 +8,9 @@ const app = express();
 const comments = {
 
 }
-let eventBusUrl = 'http://localhost:4005/posts/events';
+// let eventBusUrl = 'http://localhost:4005/posts/events';
+let eventBusUrl = 'http://eventbus-clusterip-srv:4005/posts/events';
+
 app.use(bodyParser.json())
 app.use(cors())
 

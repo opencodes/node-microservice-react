@@ -7,6 +7,7 @@ const { default: axios } = require("axios");
 const app = express();
 
 let post = {}
+let eventBusUrl = 'http://eventbus-clusterip-srv:4005/events';
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -56,7 +57,7 @@ app.listen(4002, async () => {
     console.log("Query Service - App listening on port 4002");
     console.log("Listening on 4002");
     try {
-        const res = await axios.get("http://localhost:4005/events");
+        const res = await axios.get(eventBusUrl);
 
         for (let event of res.data) {
             console.log("Processing event:", event.type);

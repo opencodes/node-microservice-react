@@ -7,7 +7,9 @@ const app = express();
 app.use(bodyParser.json())
 
 
-let eventBusUrl = 'http://localhost:4005/posts/events';
+// let eventBusUrl = 'http://localhost:4005/posts/events';
+let eventBusUrl = 'http://eventbus-clusterip-srv:4005/posts/events';
+
 const statusList = ['approved', 'rejected'];
 
 const getStatus = (second) => {

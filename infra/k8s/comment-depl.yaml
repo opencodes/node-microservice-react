@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eventbus-depl
+  name: comment-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eventbus
+      app: comment
   template:
     metadata:
       labels:
-        app: eventbus
+        app: comment
     spec:
       containers:
-        - name: eventbus
-          image: opencodes/eventbus:latest
+        - name: comment
+          image: opencodes/comment:latest
           ports:
-            - containerPort: 4005
+            - containerPort: 4001
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: eventbus-clusterip-srv
+  name: comment-clusterip-srv
 spec:
   type: ClusterIP
   selector:
-    app: eventbus
+    app: comment
   ports:
-    - name: eventbus
+    - name: comment
       protocol: TCP
-      port: 4005
-      targetPort: 4005
-
+      port: 4001
+      targetPort: 4001
+ 

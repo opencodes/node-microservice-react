@@ -18,7 +18,7 @@ app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
 
-app.post('/posts', (req, res) => {
+app.post('/posts/create', (req, res) => {
     const { title } = req.body;
     console.log(title, eventBusUrl);
     let id = randomBytes(4).toString('hex');
@@ -30,14 +30,14 @@ app.post('/posts', (req, res) => {
         .catch(err => console.log(err))
     res.status(200).send(post[id])
 })
-app.get('/posts', (req, res) => {
-    res.status(200).send(post)
-})
-app.post('/events', (req, res) => {
-    const { type, data } = req.body;
-    console.log('Event Received', type, data);
-    res.status(200).send({})
-})
+// app.get('/posts', (req, res) => {
+//     res.status(200).send(post)
+// })
+// app.post('/events', (req, res) => {
+//     const { type, data } = req.body;
+//     console.log('Event Received', type, data);
+//     res.status(200).send({})
+// })
 app.listen(4000, () => {
     console.log('version 0.0.5');
     console.log("Post Service - App listening on port 4000");
