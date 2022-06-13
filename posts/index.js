@@ -39,6 +39,6 @@ app.post('/posts/create', (req, res) => {
 //     res.status(200).send({})
 // })
 app.listen(4000, () => {
-    console.log('version 0.0.5');
+    console.log('version 0.0.6');
     console.log("Post Service - App listening on port 4000");
 })
